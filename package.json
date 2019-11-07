@@ -33,7 +33,7 @@
     "escape-string-regexp": "1.0.5",
     "merge": "^1.2.0",
     "underscore": "^1.9.1",
-    "webfonts-generator": "^0.4.0"
+    "webfonts-generator": "https://github.com/concordnow/webfonts-generator#master"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
