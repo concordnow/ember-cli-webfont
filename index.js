@@ -40,9 +40,16 @@ module.exports = {
         cssDest: 'temp/ember-cli-webfont.css'
       }, this.options());
     const webfont = new Webfont([path], options);
-    const cssTree = new Funnel(webfont, {
-      include: [new RegExp(escapeStringRegexp(options.cssDest) + '$')]
-    });
+    var cssTree;
+    if (Array.isArray(options.cssDest)) {
+      cssTree = new Funnel(webfont, {
+        include: options.cssDest.map((cssDest) => new RegExp(escapeStringRegexp(cssDest) + '$'))
+      });
+    } else {
+      cssTree = new Funnel(webfont, {
+        include: [new RegExp(escapeStringRegexp(options.cssDest) + '$')]
+      });
+    }
 
     // Nasty way to deal with an error when there is no SVG files in the specified path
     // We merge with an empty CSS file so there isn't an error when we `app.import`

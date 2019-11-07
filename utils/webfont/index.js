@@ -29,7 +29,13 @@ Webfont.prototype.build = function() {
 
   _.each(['dest', 'cssDest', 'htmlDest'], function(option) {
     let value = this.options[option];
-    if (value !== undefined) webfontsOptions[option] = path.join(this.outputPath, value);
+    if (value !== undefined) {
+      if (Array.isArray(value)) {
+        webfontsOptions[option] = value.map((v) => path.join(this.outputPath, v));
+      } else {
+        webfontsOptions[option] = path.join(this.outputPath, value);
+      }
+    }
   }, this)
 
   return new Promise(function(resolve, reject) {
